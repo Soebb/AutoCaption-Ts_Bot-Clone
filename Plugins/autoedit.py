@@ -12,8 +12,11 @@ from database.database import *
 
 @autocaption.on_message(~filters.edited, group=-1)
 async def editing(bot, message):
-    if (message.chat.type == "private") and (message.text.startswith("-100")):
-
+    if (message.chat.type == "private") and (message.text.startswith("/set")):
+        if (message.text == "/set") or (len(message.text.split(' ')) == 2):
+            await
+        else:
+            await
         caption = cmd.text.split(' ', 1)
         await update_caption(cmd.from_user.id, caption)
         await cmd.reply_text(f"**--Your Caption--:**\n\n{caption}", quote=True)
