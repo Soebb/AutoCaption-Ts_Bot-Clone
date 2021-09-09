@@ -14,7 +14,7 @@ from database.database import *
 async def editing(bot, message):
     cap = await get_caption(message.from_user.id)
     try:
-        caption = cap.caption.replace("fname", "{message.media.file_name}")
+        caption = cap.caption.replace("fname", f"{message.media.file_name}")
     except Exception as e:
         print(e)
         caption = message.caption
