@@ -10,17 +10,13 @@ from config import Config
 from database.database import *
 
 
-# =
-usercaption_position = Config.CAPTION_POSITION
-caption_position = usercaption_position.lower()
-
-
 @autocaption.on_message(filters.channel & (filters.document | filters.video | filters.audio ) & ~filters.edited, group=-1)
 async def editing(bot, message):
     cap = await get_caption()
     try:
         caption = cap.caption.replace("fname", "{message.media.file_name}")
-    except:
+    except Exception as e:
+        print(e)
         caption = message.caption
         pass
       
