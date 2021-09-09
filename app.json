@@ -1,6 +1,6 @@
 {
-  "name": "AutoCaption_Ts_Bot-Clone",
-  "description": "Telegram auto caption bot. Create your Fork now.",
+  "name": "MovieChannelManager",
+  "description": "Telegram movies caption bot. Create your Fork now.",
   "keywords": [
     "telegram",
     "best",
@@ -16,7 +16,7 @@
       "description": "Setting this to ANYTHING will enable webhooks when in env mode",
       "value": "ANYTHING"
     },
-    "TG_BOT_TOKEN": {
+    "BOT_TOKEN": {
       "description": "Your bot token, as a string.",
       "value": ""
     },
@@ -28,20 +28,11 @@
       "description": "Get this value from https://my.telegram.org",
       "value": ""
     },
-    "ADMIN_ID": {
-      "description": "Your user ID like 1223445566",
-      "value": ""      
-    },
-    "CAPTION_POSITION": {
-      "description": "Position of your caption [Enter top or bottom or nil]",
-      "value": ""
-    },
-    "ADMIN_USERNAME": {
-      "description": "Admin username without [@], Default will be Ts_bots",
-      "value": "Ts_bots", 
+    "OMDB_API_KEY": {
+      "description": "Your OMBD API KEY, Fill if you want to generate a imdb poster of movie in autofilter.",
+      "value": "",
       "required": false
-    }        
-    
+    }
   },
   "addons": [
     {
