@@ -13,19 +13,19 @@ from database.database import *
 @autocaption.on_message(~filters.edited, group=-1)
 async def editing(bot, message):
     if (message.chat.type == "private") and ("/set" in message.text):
-        if (message.text == "/set"):
+        if (message.text == "/set") or (len(message.text.split(' ')) == 2):
             await message.reply_text(
             "🖊️ 𝐒𝐄𝐓 𝐂𝐀𝐏𝐓𝐈𝐎𝐍 \n\nUse this command to set your own caption text \n\n👉 `set_caption My Caption`", 
             quote = True
             )
         else:
-            user = message.from_user.id
-            command, caption = message.text.split(' ', 1)
+            caption = message.text.split(' ', 2)[2]
+            channel = message.text.split(' ', 2)[1]
             await update_caption(user, caption)
             await message.reply_text(f"**--Your Caption--:**\n\n{caption}", quote=True)
     if (message.chat.type == "channel"):
         try:
-            cap = await get_caption(user)
+            cap = await get_caption(message.chat.id)
             caption = cap.caption.replace("fname", f"{message.media.file_name}")
         except Exception as e:
             print(e)
