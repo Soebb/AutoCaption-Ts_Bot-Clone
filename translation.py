@@ -10,7 +10,6 @@ I can automatically add pre-setted caption to the files in channels
 
 I am currently working for a channel if you want to use me, Use my source code and Deploy me
 
-⚜️ Maintained By 👉 @{}
 """    
 
       HELP_TEXT = """
@@ -86,28 +85,4 @@ __ᴘʟᴇᴀsᴇ ɴᴏᴛᴇ ɪ ᴀᴍ ɴᴏᴛ ᴀ ᴘʀᴏ ᴄᴏᴅᴇʀ ᴀ
 
 """
 
-# Bot status display
-
-      STATUS_DATA = """
-
-🔰 <u>𝐁𝐎𝐓 𝐒𝐓𝐀𝐓𝐔𝐒</u>
-
-🖌️ <b>Current Caption :</b>
-
-{}
-
-📐 <b>Current Position :</b> {}
-
-<b><a href="https://t.me/Ts_bots">©️ ᴛʀᴀᴄᴋsᴛᴜᴅɪᴏ's ʙᴏᴛs</a></b>
-
-"""
-
-      NOT_ADMIN_TEXT = """
-
-🔰 <u>𝐒𝐎𝐑𝐑𝐘</u>
-
-Only my admin can see my status, if you want this bot you can take my source code and deploy it. 
-
-<b><a href="https://t.me/Ts_bots">©️ ᴛʀᴀᴄᴋsᴛᴜᴅɪᴏ's ʙᴏᴛs</a></b>
-
-"""
+      
