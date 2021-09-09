@@ -62,7 +62,7 @@ about_button=InlineKeyboardMarkup(
 async def start(bot, cmd):
       await bot.send_message(
           chat_id = cmd.chat.id,
-          text = Translation.START_TEXT.format(cmd.from_user.first_name, Config.ADMIN_USERNAME), 
+          text = Translation.START_TEXT.format(cmd.from_user.first_name), 
           reply_to_message_id = cmd.message_id,
           parse_mode = "markdown",
           disable_web_page_preview = True, 
@@ -96,9 +96,6 @@ async def about(bot, cmd):
 
 @autocaption.on_message(filters.command("set_caption") & filters.private)
 async def set_caption(bot, cmd):
-    if Config.ADMIN_ID != cmd.from_user.id:
-        return
-
     if len(cmd.command) == 1:
         await cmd.reply_text(
             "🖊️ 𝐒𝐄𝐓 𝐂𝐀𝐏𝐓𝐈𝐎𝐍 \n\nUse this command to set your own caption text \n\n👉 `set_caption My Caption`", 
@@ -152,7 +149,7 @@ async def button(bot, cmd: CallbackQuery):
           )
     elif "back_data" in cb_data:
           await cmd.message.edit(
-               text=Translation.START_TEXT.format(cmd.from_user.first_name, Config.ADMIN_USERNAME),
+               text=Translation.START_TEXT.format(cmd.from_user.first_name),
                parse_mode="markdown", 
                disable_web_page_preview=True, 
                reply_markup=InlineKeyboardMarkup(
@@ -191,40 +188,4 @@ async def button(bot, cmd: CallbackQuery):
                    ] 
                ) 
           )
-    elif "status_data" in cb_data:
-          if Config.ADMIN_ID == int(cmd.message.chat.id):
-             try:
-                caption = await get_caption(cmd.from_user.id)
-                caption_text = caption.caption
-             except:
-                caption_text = "Not Added" 
-             await cmd.message.edit(
-                  text=Translation.STATUS_DATA.format(caption_text, Config.CAPTION_POSITION),
-                  parse_mode="html", 
-                  disable_web_page_preview=True, 
-                  reply_markup=InlineKeyboardMarkup(
-                      [
-                          [
-                           InlineKeyboardButton("⬇️ BACK", callback_data="back_data"),
-                           InlineKeyboardButton("🔐 CLOSE", callback_data="close_data")
-                          ]
- 
-                      ] 
-                  ) 
-             )
-          else:
-             await cmd.message.edit(
-                  text=Translation.NOT_ADMIN_TEXT,
-                  parse_mode="html", 
-                  disable_web_page_preview=True, 
-                  reply_markup=InlineKeyboardMarkup(
-                      [
-                          [
-                           InlineKeyboardButton("⬇️ BACK", callback_data="back_data"),
-                           InlineKeyboardButton("🔐 CLOSE", callback_data="close_data")
-                          ]
- 
-                      ] 
-                  ) 
-             )
- 
+    
