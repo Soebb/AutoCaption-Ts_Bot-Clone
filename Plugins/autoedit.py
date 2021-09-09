@@ -12,7 +12,7 @@ from database.database import *
 
 @autocaption.on_message(filters.channel & (filters.document | filters.video | filters.audio ) & ~filters.edited, group=-1)
 async def editing(bot, message):
-    cap = await get_caption()
+    cap = await get_caption(message.from_user.id)
     try:
         caption = cap.caption.replace("fname", "{message.media.file_name}")
     except Exception as e:
