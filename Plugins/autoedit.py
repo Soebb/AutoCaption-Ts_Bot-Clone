@@ -17,20 +17,18 @@ caption_position = usercaption_position.lower()
 
 @autocaption.on_message(filters.channel & (filters.document | filters.video | filters.audio ) & ~filters.edited, group=-1)
 async def editing(bot, message):
-      cap = await get_caption()
-      try:
-         caption = cap.caption
-      except:
-         caption = message.caption
-         pass 
-      if key:
-          await 
-      await bot.edit_message_caption(
-          chat_id = message.chat.id,
-          message_id = message.message_id,
-          caption = caption, 
-          parse_mode = "markdown"
-      ) 
+    cap = await get_caption()
+    try:
+        caption = cap.caption
+    except:
+        caption = message.caption
+        pass
+      
+    msg = await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = caption, parse_mode = "markdown")
+    '''if key and poster:
+          await message.reply_photo(photo=poster, caption=
+          await msg.copy(message.chat.id)
+          await msg.delete()'''
       
                    
       
