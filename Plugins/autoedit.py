@@ -19,12 +19,12 @@ caption_position = usercaption_position.lower()
 async def editing(bot, message):
     cap = await get_caption()
     try:
-        caption = cap.caption
+        caption = cap.caption.replace("fname", "{message.media.file_name}")
     except:
         caption = message.caption
         pass
       
-    msg = await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = caption, parse_mode = "markdown")
+    msg = await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown")
     '''if key and poster:
           await message.reply_photo(photo=poster, caption=
           await msg.copy(message.chat.id)
