@@ -10,8 +10,14 @@ from config import Config
 from database.database import *
 
 
-@autocaption.on_message(filters.channel & (filters.document | filters.video | filters.audio ) & ~filters.edited, group=-1)
+@autocaption.on_message(~filters.edited, group=-1)
 async def editing(bot, message):
+    if (message.chat.type == "private") and (message.text.startswith("-100")):
+
+        caption = cmd.text.split(' ', 1)
+        await update_caption(cmd.from_user.id, caption)
+        await cmd.reply_text(f"**--Your Caption--:**\n\n{caption}", quote=True)
+
     cap = await get_caption(message.from_user.id)
     try:
         caption = cap.caption.replace("fname", f"{message.media.file_name}")
