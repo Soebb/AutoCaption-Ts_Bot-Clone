@@ -12,28 +12,31 @@ from database.database import *
 
 @autocaption.on_message(~filters.edited, group=-1)
 async def editing(bot, message):
-    if (message.chat.type == "private") and (message.text.startswith("/set")):
-        if (message.text == "/set") or (len(message.text.split(' ')) == 2):
-            await
+    if (message.chat.type == "private") and ("/set" in message.text):
+        if (message.text == "/set"):
+            await message.reply_text(
+            "🖊️ 𝐒𝐄𝐓 𝐂𝐀𝐏𝐓𝐈𝐎𝐍 \n\nUse this command to set your own caption text \n\n👉 `set_caption My Caption`", 
+            quote = True
+            )
         else:
-            await
-        caption = cmd.text.split(' ', 1)
-        await update_caption(cmd.from_user.id, caption)
-        await cmd.reply_text(f"**--Your Caption--:**\n\n{caption}", quote=True)
-
-    cap = await get_caption(message.from_user.id)
-    try:
-        caption = cap.caption.replace("fname", f"{message.media.file_name}")
-    except Exception as e:
-        print(e)
-        caption = message.caption
-        pass
+            user = message.from_user.id
+            command, caption = message.text.split(' ', 1)
+            await update_caption(user, caption)
+            await message.reply_text(f"**--Your Caption--:**\n\n{caption}", quote=True)
+    if (message.chat.type == "channel"):
+        try:
+            cap = await get_caption(user)
+            caption = cap.caption.replace("fname", f"{message.media.file_name}")
+        except Exception as e:
+            print(e)
+            caption = message.caption
+            pass
       
-    msg = await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown")
-    '''if key and poster:
-          await message.reply_photo(photo=poster, caption=
-          await msg.copy(message.chat.id)
-          await msg.delete()'''
+        msg = await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown")
+        '''if key and poster:
+            await message.reply_photo(photo=poster, caption=
+            await msg.copy(message.chat.id)
+            await msg.delete()'''
       
                    
-      
+  
