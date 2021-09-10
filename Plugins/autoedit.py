@@ -21,7 +21,7 @@ async def editing(bot, message):
         else:
             caption = message.text.split(' ', 2)[2]
             channel = message.text.split(' ', 2)[1]
-            await update_caption(user, caption)
+            await update_caption(channel, caption)
             await message.reply_text(f"**--Your Caption--:**\n\n{caption}", quote=True)
     if (message.chat.type == "channel"):
         try:
