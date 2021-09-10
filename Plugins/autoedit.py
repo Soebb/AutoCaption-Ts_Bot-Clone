@@ -23,6 +23,7 @@ async def editing(bot, message):
             except Exception as e:
                 print(e)
                 return await message.reply_text("It seems you already seted caption for that channel id, you should first use /rmv command to remove the current caption and then try seting new again.")
+            await message.reply_text(f"**--Your Caption--:**\n\n{caption}", quote=True)
         if (message.text == "/rmv"):
             await message.reply_text("Use this command to remove the current caption of any of your channels.\n\n👉 `/rmv -1001448973320`", quote = True)
         elif ("/rmv" in message.text) and (len(message.text.split(' ')) != 1):
