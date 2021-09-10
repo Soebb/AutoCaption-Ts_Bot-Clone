@@ -21,7 +21,7 @@ async def editing(bot, message):
             try:
                 await update_caption(channel, caption)
             except:
-                await delete_caption(channel)
+                await del_caption(channel)
                 await update_caption(channel, caption)
             await message.reply_text(f"**--Your Caption--:**\n\n{caption}", quote=True)
 
