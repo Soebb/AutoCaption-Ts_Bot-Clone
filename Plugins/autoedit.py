@@ -14,15 +14,17 @@ from database.database import *
 async def editing(bot, message):
     if (message.chat.type == "private") and ("/set" in message.text):
         if (message.text == "/set") or (len(message.text.split(' ')) == 2):
-            await message.reply_text(
-            "🖊️ 𝐒𝐄𝐓 𝐂𝐀𝐏𝐓𝐈𝐎𝐍 \n\nUse this command to set your own caption text \n\n👉 `set_caption My Caption`", 
-            quote = True
-            )
+            await message.reply_text("🖊️ 𝐒𝐄𝐓 𝐂𝐀𝐏𝐓𝐈𝐎𝐍 \n\nUse this command to set your own custom caption for any of your channels.\n\n👉 `/set -1001448973320 My Caption`", quote = True)
         else:
             caption = message.text.split(' ', 2)[2]
             channel = message.text.split(' ', 2)[1].replace("-100", "")
-            await update_caption(channel, caption)
+            try:
+                await update_caption(channel, caption)
+            except:
+                await delete_caption(channel)
+                await update_caption(channel, caption)
             await message.reply_text(f"**--Your Caption--:**\n\n{caption}", quote=True)
+
     if (message.chat.type == "channel"):
         media = message.video or message.document or message.audio
         channel = str(message.chat.id).replace('-100', '')
