@@ -12,18 +12,22 @@ from database.database import *
 
 @autocaption.on_message(~filters.edited, group=-1)
 async def editing(bot, message):
-    if (message.chat.type == "private") and ("/set" in message.text):
-        if (message.text == "/set") or (len(message.text.split(' ')) == 2):
+    if (message.chat.type == "private"):
+        if ("/set" in message.text) and ((len(message.text.split(' ')) == 2) or (len(message.text.split(' ')) == 1)):
             await message.reply_text("🖊️ 𝐒𝐄𝐓 𝐂𝐀𝐏𝐓𝐈𝐎𝐍 \n\nUse this command to set your own custom caption for any of your channels.\n\n👉 `/set -1001448973320 My Caption`", quote = True)
-        else:
+        elif ("/set" in message.text) and (len(message.text.split(' ')) != 2) and (len(message.text.split(' ')) != 1):
             caption = message.text.split(' ', 2)[2]
             channel = message.text.split(' ', 2)[1].replace("-100", "")
             try:
                 await update_caption(channel, caption)
-            except:
-                await del_caption(channel)
-                await update_caption(channel, caption)
-            await message.reply_text(f"**--Your Caption--:**\n\n{caption}", quote=True)
+            except Exception as e:
+                print(e)
+                return await message.reply_text("It seems you already seted caption for that channel id, you should first use /rmv command to remove the current caption and then try seting new again.")
+        if (message.text == "/rmv"):
+            await message.reply_text("Use this command to remove the current caption of any of your channels.\n\n👉 `/rmv -1001448973320`", quote = True)
+        elif ("/rmv" in message.text) and (len(message.text.split(' ')) != 1):
+            await del_caption(channel)
+            await message.reply_text("The seted caption removed successfully.")
 
     if (message.chat.type == "channel"):
         media = message.video or message.document or message.audio
