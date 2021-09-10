@@ -27,6 +27,7 @@ async def editing(bot, message):
         if (message.text == "/rmv"):
             await message.reply_text("Use this command to remove the current caption of any of your channels.\n\n👉 `/rmv -1001448973320`", quote = True)
         elif ("/rmv" in message.text) and (len(message.text.split(' ')) != 1):
+            channel = message.text.split(' ', 1)[1].replace("-100", "")
             await del_caption(channel)
             await message.reply_text("The seted caption removed successfully.")
 
