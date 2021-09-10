@@ -24,8 +24,9 @@ async def editing(bot, message):
             await update_caption(channel, caption)
             await message.reply_text(f"**--Your Caption--:**\n\n{caption}", quote=True)
     if (message.chat.type == "channel"):
+        channel = str(message.chat.id).replace('-100', '')
         try:
-            cap = await get_caption(message.chat.id.replace('-100', ''))
+            cap = await get_caption(int(channel))
             caption = cap.caption.replace("fname", f"{message.media.file_name}")
         except Exception as e:
             print(e)
