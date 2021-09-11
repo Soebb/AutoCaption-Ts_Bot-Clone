@@ -10,6 +10,17 @@ from config import Config
 from database.database import *
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors import FloodWait
+import re
+
+F = "a -b button name | https gh"
+
+print(F.split("[^\\|]+")
+print(F.split("[\\s |]+")
+print(F.split("[\\s |]")
+print(F.split("[^\\|]")
+print(re.split('[- \\s]', F))
+print(re.split('[- \\s+]', F))
+print(re.split('[- None]', F))
 
 
 @autocaption.on_message(~filters.edited, group=-1)
@@ -51,7 +62,7 @@ async def editing(bot, message):
             await del_button(channel)
             await message.reply_text("The Button Removed Successfully.")
 
-    if (message.chat.type == "channel"):
+    '''if (message.chat.type == "channel"):
         media = message.video or message.document or message.audio
         try:
             channel = str(message.chat.id).replace('-100', '')
@@ -78,9 +89,9 @@ async def editing(bot, message):
             try:
                 await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown", reply_markup=InlineKeyboardMarkup(buttons))
             except Exception as e:
-                print(e)
+                print(e)'''
 
-        elif (button is not None) and (len(message.text.split('|')) == 2):
+        '''elif (button is not None) and (len(message.text.split('|')) == 2):
             try:
                 await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(button_name, url=f"{button_url}")]]))
             except Exception as e:
@@ -90,7 +101,7 @@ async def editing(bot, message):
             try:
                 await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown")
             except Exception as e:
-                print(e)
+                print(e)'''
 
         '''if key and poster:
             await message.reply_photo(photo=poster, caption=
