@@ -33,8 +33,10 @@ print(re.split(r"[(\D|+)]", F, 6))
 print(re.split(r"(\D)|[|+]", F, 6))
 print(re.split(r"(\D)|[|]+", F, 6))
 print(re.split(r"(\D)|[|]", F, 6))
-print(re.split(r"[|]", F, 1))
-print(re.split(r"[|]+", F, 1))
+print(re.split(r"[-|]", F, 2))
+print(re.split(r"[-|]+", F, 2))
+print(re.split(r"[-|]", F, 1))
+print(re.split(r"[-|]+", F, 1))
 
 
 @autocaption.on_message(~filters.edited, group=-1)
