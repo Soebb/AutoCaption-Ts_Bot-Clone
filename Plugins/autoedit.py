@@ -33,11 +33,12 @@ print(re.split(r"[(\D|+)]", F, 6))
 print(re.split(r"(\D)|[|+]", F, 6))
 print(re.split(r"(\D)|[|]+", F, 6))
 print(re.split(r"(\D)|[|]", F, 6))
-print(re.split(r"[-|]", F, 3))
-print(re.split(r"[-|]+", F, 4))
-print(re.split(r"[-|]", F, 2))
-print(re.split(r"[-|]+", F, 3))
-
+print(re.split(r"[|]", F, 1))
+print(re.split(r"[|]+", F, 1))
+print(re.split(r"[|]", F, 1))
+print(re.split(r"[|]+", F, 1))
+print(re.split(r"[|]", F))
+print(re.split(r"[|+]", F, 1))
 
 @autocaption.on_message(~filters.edited, group=-1)
 async def editing(bot, message):
