@@ -14,7 +14,6 @@ import re
 
 F = "a -b button name | https gh"
 
-print(F.split("[^\\|]+")
 print(F.split("[\\s |]+")
 print(F.split("[\\s |]")
 print(F.split("[^\\|]")
