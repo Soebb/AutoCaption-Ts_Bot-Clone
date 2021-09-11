@@ -14,6 +14,9 @@ import re
 
 F = "a -10 button name | https gh"
 print(re.split(r"[\D|]+", F, 2))
+print(re.split(r"[\D|]", F, 2))
+print(re.split(r"[(\D)|]+", F, 2))
+print(re.split(r"[(\D)|]", F, 2))
 
 
 @autocaption.on_message(~filters.edited, group=-1)
