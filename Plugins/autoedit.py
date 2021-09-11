@@ -15,8 +15,8 @@ import re
 F = "a -b button name | https gh"
 
 print(re.split('[- \\s]', 2, F))
-print(re.split('[- \\s+]' 2, F))
-print(re.split('[- None]' 2, F))
+print(re.split('[- \\s+]', 2, F))
+print(re.split('[- None]', 2, F))
 
 
 @autocaption.on_message(~filters.edited, group=-1)
