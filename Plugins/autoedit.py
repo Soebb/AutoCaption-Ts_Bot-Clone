@@ -8,6 +8,8 @@ from pyrogram import filters
 from bot import autocaption
 from config import Config
 from database.database import *
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.errors import FloodWait
 
 
 @autocaption.on_message(~filters.edited, group=-1)
@@ -74,7 +76,7 @@ async def editing(bot, message):
 
         elif (button is not None) and (len(message.text.split('|')) == 2):
             try:
-                await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown")
+                await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(button_name, url=f"{button_url}")]]))
             except Exception as e:
                 print(e)
 
