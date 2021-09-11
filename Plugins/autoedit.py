@@ -51,17 +51,39 @@ async def editing(bot, message):
 
     if (message.chat.type == "channel"):
         media = message.video or message.document or message.audio
-        channel = str(message.chat.id).replace('-100', '')
-        button = str(message.chat.id).replace('-', '')
         try:
+            channel = str(message.chat.id).replace('-100', '')
             cap = await get_caption(int(channel))
             caption = cap.caption.replace("fname", f"{media.file_name}")
-        except Exception as e:
-            print(e)
+        except:
             caption = message.caption
             pass
-      
-        msg = await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown")
+        try:
+            channel = str(message.chat.id).replace('-', '')
+            btn = await get_button(int(channel))
+            button = btn.button
+        except:
+            button = None
+            pass
+        
+        if (button is not None) and (len(message.text.split('|')) == 3):
+            try:
+                await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown")
+            except Exception as e:
+                print(e)
+
+        elif (button is not None) and (len(message.text.split('|')) == 2):
+            try:
+                await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown")
+            except Exception as e:
+                print(e)
+
+        elif button is None:
+            try:
+                await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown")
+            except Exception as e:
+                print(e)
+
         '''if key and poster:
             await message.reply_photo(photo=poster, caption=
             await msg.copy(message.chat.id)
