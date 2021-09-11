@@ -69,8 +69,14 @@ async def editing(bot, message):
             pass
         
         if (button is not None) and (len(message.text.split('|')) == 3):
+            buttons = [
+                [
+                    InlineKeyboardButton('Search again', switch_inline_query_current_chat=''),
+                    InlineKeyboardButton('Go Inline', switch_inline_query='')
+                ]
+                ]
             try:
-                await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown")
+                await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown", reply_markup=InlineKeyboardMarkup(buttons))
             except Exception as e:
                 print(e)
 
