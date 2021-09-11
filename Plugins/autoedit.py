@@ -13,10 +13,10 @@ from pyrogram.errors import FloodWait
 import re
 
 F = "a b button name × https gh"
-print(re.split(r"[×\s]", F, maxsplit=2))
-print(re.split('[× \\s]', F, maxsplit=2))
-print(re.split('[× \\s+]', F, maxsplit=2))
-print(re.split('[None x]', F, maxsplit=2))
+print(re.split(r"[×\s]", F, maxsplit=3))
+print(re.split('[× \\s]', F, maxsplit=3))
+print(re.split('[× \\s+]', F, maxsplit=3))
+print(re.split('[None x]', F, maxsplit=3))
 
 
 @autocaption.on_message(~filters.edited, group=-1)
