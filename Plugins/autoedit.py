@@ -77,8 +77,9 @@ async def editing(bot, message):
             
             N = button.split(' | ')[+1]
             G = button.split(' ', 2)[2].split(f" | {N}")[0]
-            J = button.split(' | ')[-1]
+            J = button.split(' | ')[0]
             
+            print(button)
             print(J)
             print(N)
             print(G)
