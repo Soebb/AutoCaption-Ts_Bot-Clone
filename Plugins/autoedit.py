@@ -74,7 +74,15 @@ async def editing(bot, message):
         if button is not None:
             Url = button.rsplit(' ', 1)[1]
             Name = button.split(' ', 2)[2].split(f" | {Url}")[0]
-            Nae = button.split(' ', 2)[2].split(f" | {Url}")[-1]
+            Nae = button.split(' ', 2)[2].split(f" | {Url}")[+1]
+            N = button.split(' | ')[+1]
+            G = button.split(' ', 2)[2].split(f" | {N}")[0]
+            J = button.split(' | ')[-1]
+            T = button.split(' | ')[-1].split(' ', 2)[2]
+            print(T)
+            print(J)
+            print(N)
+            print(G)
             print(Name)
             print(Nae)
             try:
