@@ -74,6 +74,9 @@ async def editing(bot, message):
         if button is not None:
             Url = button.rsplit(' ', 1)[1]
             Name = button.split(' ', 2)[2].split(f" | {Url}")[0]
+            Nae = button.split(' ', 2)[2].split(f" | {Url}")[-1]
+            print(Name)
+            print(Nae)
             try:
                 await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(Name, url=f"{Url}")]]))
             except Exception as e:
