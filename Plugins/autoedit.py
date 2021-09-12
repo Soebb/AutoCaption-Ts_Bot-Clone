@@ -24,7 +24,7 @@ async def editing(bot, message):
                 await update_caption(channel, caption)
             except Exception as e:
                 print(e)
-                return await message.reply_text("It seems you already seted caption for that channel id, you should first use /rmv_cap command to remove the current caption and then try seting new again.")
+                return await message.reply_text("It seems a caption already seted for this channel id, you should first use /rmv_cap command to remove the current caption and then try seting new again.")
             await message.reply_text(f"**--Your Caption--:**\n\n{caption}", quote=True)
         if ("/set_btn" in message.text) and ((len(message.text.split(' ')) == 2) or (len(message.text.split(' ')) == 1)):
             await message.reply_text("🖊️ 𝐒𝐄𝐓 𝐂𝐀𝐏𝐓𝐈𝐎𝐍 \n\nUse this command to set your own button for any of your channels.\nSend a Button name and URL separated by ' | '\n\n👉 `/set_btn -1001448973320 Button Name | https://t.me/my_channel`", quote = True)
@@ -35,7 +35,7 @@ async def editing(bot, message):
                 await update_button(channel, button)
             except Exception as e:
                 print(e)
-                return await message.reply_text("It seems you already seted button for that channel id, you should first use /rmv_btn command to remove the current button and then try seting new again.")
+                return await message.reply_text("It seems a button already seted for this channel id, you should first use /rmv_btn command to remove the current button and then try seting new again.")
             await message.reply_text(f"**--Your Button--:**\n\n{button}", quote=True)
       
         if (message.text == "/rmv_cap"):
@@ -72,7 +72,7 @@ async def editing(bot, message):
             Url = button.rsplit(' ', 1)[1]
             Name = button.split(' ', 2)[2].replace(f" | {Url}", "")
             try:
-                await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(button_name, url=f"{button_url}")]]))
+                await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(Name, url=f"{Url}")]]))
             except Exception as e:
                 print(e)
 
