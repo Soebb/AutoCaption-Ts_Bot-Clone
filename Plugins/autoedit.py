@@ -58,7 +58,7 @@ async def editing(bot, message):
             cap = await get_caption(int(channel))
             caption = cap.caption.replace("fname", f"{media.file_name}")
         except:
-            caption = message.caption
+            caption = " "
             pass
         try:
             channel = str(message.chat.id).replace('-100', '').replace('1', '')
@@ -66,7 +66,7 @@ async def editing(bot, message):
             button = btn.button
         except Exception as e:
             button = None
-            print(f"{e}")
+            print(f"eror: {e}")
             pass
         
         if button is not None:
