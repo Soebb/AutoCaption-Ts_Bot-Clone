@@ -64,9 +64,9 @@ async def editing(bot, message):
             channel = str(message.chat.id).replace('-100', '').replace('1', '')
             btn = await get_button(int(channel))
             button = btn.button
-        except Exception as r:
-          ‌  print(r)
+        except Exception as e:
             button = None
+            print(f"{e}")
             pass
         
         if button is not None:
