@@ -14,10 +14,10 @@ import re
 from datetime import datetime, timedelta
 from threading import Timer
 
-F = "a -10 button name | https gh"
+F = "a -10 button name | https"
 
 Url = F.rsplit(' ', 1)[1]
-Name = F.split(' ', 2)[2].replace(f"{Url}", "")
+Name = F.split(' ', 2)[2].replace(f" | {Url}", "")
 print(Url)
 print(Name)
 
