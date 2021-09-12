@@ -54,13 +54,6 @@ async def editing(bot, message):
     if (message.chat.type == "channel"):
         media = message.video or message.document or message.audio
         try:
-            channel = str(message.chat.id).replace('-100', '')
-            cap = await get_caption(int(channel))
-            caption = cap.caption.replace("fname", f"{media.file_name}")
-        except:
-            caption = " "
-            pass
-        try:
             channel = str(message.chat.id).replace('-100', '').replace('1', '')
             btn = await get_button(int(channel))
             button = btn.button
@@ -68,6 +61,15 @@ async def editing(bot, message):
             button = None
             print(f"eror: {e}")
             pass
+
+        try:
+            channel = str(message.chat.id).replace('-100', '')
+            cap = await get_caption(int(channel))
+            caption = cap.caption.replace("fname", f"{media.file_name}")
+        except:
+            caption = " "
+            pass
+        
         
         if button is not None:
             Url = button.rsplit(' ', 1)[1]
