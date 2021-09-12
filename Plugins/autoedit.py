@@ -16,31 +16,10 @@ from threading import Timer
 
 F = "a -10 button name | https gh"
 
-print(re.split(r"[\D|]", F, 5))
-print(re.split(r"[(\D)|]", F, 5))
-print(re.split(r"[\D|+]", F, 5))
-print(re.split(r"[(\D)|+]", F, 5))
-print(re.split(r"[(\D|)]", F, 5))
-print(re.split(r"[(\D|+)]", F, 5))
-print(re.split(r"(\D)|[|+]", F, 5))
-print(re.split(r"(\D)|[|]+", F, 5))
-print(re.split(r"(\D)|[|]", F, 5))
-
-print(re.split(r"[\D|]", F, 6))
-print(re.split(r"[(\D)|]", F, 6))
-print(re.split(r"[\D|+]", F, 6))
-print(re.split(r"[(\D)|+]", F, 6))
-print(re.split(r"[(\D|)]", F, 6))
-print(re.split(r"[(\D|+)]", F, 6))
-print(re.split(r"(\D)|[|+]", F, 6))
-print(re.split(r"(\D)|[|]+", F, 6))
-print(re.split(r"(\D)|[|]", F, 6))
-print(re.split(r"[|]", F, 1))
-print(re.split(r"[|]+", F, 1))
-print(re.split(r"[|]", F, 1))
-print(re.split(r"[|]+", F, 1))
-print(re.split(r"[|]", F))
-print(re.split(r"[|+]", F, 1))
+Url = F.rsplit(' ', 1)[1]
+Name = F.split(' ', 2)[2].replace(f"{Url}", "")
+print(Url)
+print(Name)
 
 x=datetime.today()
 y=x.replace(day=x.day, hour=x.hour, minute=x.minute+4, second=x.second, microsecond=x.microsecond)
