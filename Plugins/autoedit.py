@@ -84,7 +84,7 @@ async def editing(bot, message):
             print(N)
             print(G)
             print(Name)
-            print(Nae)
+            
             try:
                 await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(Name, url=f"{Url}")]]))
             except Exception as e:
