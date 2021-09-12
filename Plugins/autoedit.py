@@ -47,7 +47,7 @@ async def editing(bot, message):
         if (message.text == "/rmv_btn"):
             await message.reply_text("Use this command to remove the current button of any of your channels.\n\n👉 `/rmv_btn -1001448973320`", quote = True)
         elif ("/rmv_btn" in message.text) and (len(message.text.split(' ')) != 1):
-            channel = message.text.split(' ', 1)[1].replace("-", "")
+            channel = message.text.split(' ', 1)[1].replace("-100", "").replace("1", "")
             await del_button(channel)
             await message.reply_text("The Button Removed Successfully.")
 
