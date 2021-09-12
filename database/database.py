@@ -82,7 +82,7 @@ async def update_button(id, button):
             SESSION.flush()
         else:
             SESSION.delete(btn)
-            cap = custom_button(id, button)
+            btn = custom_button(id, button)
             SESSION.add(btn)
         SESSION.commit()
 
@@ -94,7 +94,7 @@ async def del_button(id):
 
 async def get_button(id):
     try:
-        caption = SESSION.query(custom_button).get(id)
+        button = SESSION.query(custom_button).get(id)
         return button
     finally:
         SESSION.close()
