@@ -12,50 +12,18 @@ from translation import Translation
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
  
 
-#all buttons 
-
-#start buttons 
-
 start_button=InlineKeyboardMarkup(
         [
               [
-                  InlineKeyboardButton("📄 BOT STATUS", callback_data = "status_data")
-              ], 
+                  InlineKeyboardButton("About Markdown", callback_data = "markdown_data"), 
+                  InlineKeyboardButton("About Dynamic", callback_data = "dynamic_data")
+              ],
               [
-                  InlineKeyboardButton("📫 UPDATES", url = "https://t.me/Ts_bots"), 
-                  InlineKeyboardButton("📕 ABOUT", callback_data = "about_data")
-              ], 
-              [
-                  InlineKeyboardButton("💡 HELP", callback_data = "help_data"), 
-                  InlineKeyboardButton("🔐 CLOSE", callback_data = "close_data")
-              ] 
-        ]
-)
-
-# help buttons
-
-help_button=InlineKeyboardMarkup(
-        [
-              [
-                InlineKeyboardButton("ABOUT MARKDOWN", callback_data = "markdown_data")
-              ], 
-              [
-                  InlineKeyboardButton("⬇️ BACK", callback_data = "back_data"), 
-                  InlineKeyboardButton("🔐 CLOSE", callback_data = "close_data")
+                  InlineKeyboardButton("Source Code", url = "https://github.com/samadii/ChannelAutoCaption"),
+                  InlineKeyboardButton("🔐 CLOSE", callback_data="close_data")
               ]
         ]
 )
- 
-# about button 
-
-about_button=InlineKeyboardMarkup(
-        [
-              [
-                  InlineKeyboardButton("⬇️ BACK", callback_data = "back_data"), 
-                  InlineKeyboardButton("🔐 CLOSE", callback_data = "close_data")
-              ]
-        ]
-) 
 
 
 @autocaption.on_message(filters.command("start") & filters.private)
@@ -70,90 +38,17 @@ async def start(bot, cmd):
       )
 
 
-@autocaption.on_message(filters.command("help") & filters.private)
-async def help(bot, cmd):
-      await bot.send_message(
-          chat_id = cmd.chat.id,
-          text = Translation.HELP_TEXT, 
-          reply_to_message_id = cmd.message_id,
-          parse_mode = "html",
-          disable_web_page_preview = True,
-          reply_markup = help_button           
-      )
-
-
-@autocaption.on_message(filters.command("about") & filters.private)
-async def about(bot, cmd):
-      await bot.send_message(
-          chat_id = cmd.chat.id,
-          text = Translation.ABOUT_TEXT, 
-          reply_to_message_id = cmd.message_id,
-          parse_mode = "markdown",
-          disable_web_page_preview = True, 
-          reply_markup = about_button
-      )   
-
-
-
 # call_backs 
 
 @autocaption.on_callback_query()
 async def button(bot, cmd: CallbackQuery):
     cb_data = cmd.data
-    if "about_data" in cb_data:
-        await cmd.message.edit(
-             text = Translation.ABOUT_TEXT,
-             parse_mode="markdown", 
-             disable_web_page_preview=True, 
-             reply_markup=InlineKeyboardMarkup(
-                 [
-                     [
-                      InlineKeyboardButton("⬇️ BACK", callback_data="back_data"),
-                      InlineKeyboardButton("🔐 CLOSE", callback_data="close_data")
-                     ]
- 
-                 ] 
-             ) 
-        )
-    elif "help_data" in cb_data:
-          await cmd.message.edit(
-               text=Translation.HELP_TEXT,
-               parse_mode="html", 
-               disable_web_page_preview=True, 
-               reply_markup=InlineKeyboardMarkup(
-                   [
-                       [
-                        InlineKeyboardButton("ABOUT MARKDOWN", callback_data = "markdown_data")
-                       ],
-                       [
-                        InlineKeyboardButton("⬇️ BACK", callback_data="back_data"),
-                        InlineKeyboardButton("🔐 CLOSE", callback_data="close_data")
-                       ]
- 
-                   ] 
-               ) 
-          )
-    elif "back_data" in cb_data:
+    if "back_data" in cb_data:
           await cmd.message.edit(
                text=Translation.START_TEXT.format(cmd.from_user.first_name),
                parse_mode="markdown", 
                disable_web_page_preview=True, 
-               reply_markup=InlineKeyboardMarkup(
-                   [
-                      
-                       [
-                        InlineKeyboardButton("📄 BOT STATUS", callback_data = "status_data")
-                       ], 
-                       [
-                        InlineKeyboardButton("📫 UPDATES", url="https://t.me/ts_bots"),
-                        InlineKeyboardButton("📕 ABOUT ME", callback_data="about_data")
-                       ],
-                       [
-                        InlineKeyboardButton("💡 HELP", callback_data="help_data"),
-                        InlineKeyboardButton("🔐 CLOSE", callback_data="close_data")
-                       ]
-                   ]
-               )
+               reply_markup=start_button
           )
     elif "close_data" in cb_data:
           await cmd.message.delete()
@@ -167,7 +62,22 @@ async def button(bot, cmd: CallbackQuery):
                reply_markup=InlineKeyboardMarkup(
                    [
                        [
-                        InlineKeyboardButton("⬇️ BACK", callback_data="help_data"),
+                        InlineKeyboardButton("⬇️ BACK", callback_data="back_data"),
+                        InlineKeyboardButton("🔐 CLOSE", callback_data="close_data")
+                       ]
+ 
+                   ] 
+               ) 
+          )
+    elif "dynamic_data" in cb_data:
+          await cmd.message.edit(
+               text=Translation.DYNAMIC_TEXT,
+               parse_mode="html", 
+               disable_web_page_preview=True, 
+               reply_markup=InlineKeyboardMarkup(
+                   [
+                       [
+                        InlineKeyboardButton("⬇️ BACK", callback_data="back_data"),
                         InlineKeyboardButton("🔐 CLOSE", callback_data="close_data")
                        ]
  
