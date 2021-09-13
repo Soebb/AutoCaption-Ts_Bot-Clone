@@ -57,7 +57,7 @@ async def button(bot, cmd: CallbackQuery):
     elif "markdown_data" in cb_data:
           await cmd.message.edit(
                text=Translation.MARKDOWN_TEXT,
-               parse_mode="md", 
+               parse_mode="html", 
                disable_web_page_preview=True, 
                reply_markup=InlineKeyboardMarkup(
                    [
