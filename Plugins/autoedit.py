@@ -52,7 +52,7 @@ async def editing(bot, message):
             await message.reply_text("✅The Button Removed Successfully.", quote=True)
 
     if (message.chat.type == "channel"):
-        media = message.video or message.document or message.audio
+        m = message.video or message.document or message.audio
         try:
             channel = str(message.chat.id).replace('-100', '').replace('1', '')
             btn = await get_button(int(channel))
@@ -64,7 +64,12 @@ async def editing(bot, message):
         try:
             channel = str(message.chat.id).replace('-100', '')
             cap = await get_caption(int(channel))
-            caption = cap.caption.replace("fname", f"{media.file_name}")
+            if message.audio:
+                caption = cap.caption.replace("{filename}", f"{m.file_name}").replace("{artist}", f"{m.performer}").replace("{title}", f"{m.title}").replace("{performer}", f"{m.performer}").
+            elif message.video:
+                caption = cap.caption.replace("{filename}", f"{m.file_name}").replace("{performer}", f"{m.performer}").replace("{performer}", f"{m.performer}").replace("{performer}", f"{m.performer}").
+            elif message.document:
+                caption = cap.caption.replace("{filename}", f"{m.file_name}").replace("{performer}", f"{m.performer}").
         except:
             caption = None
             pass
