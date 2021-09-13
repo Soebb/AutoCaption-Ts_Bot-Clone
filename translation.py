@@ -5,6 +5,7 @@ class Translation(object):
 
 😃 Hi {},
 I am Channel Auto Caption bot.
+
 I can automatically add pre-setted caption and button to the files in channels.
 
 • Commands
@@ -39,27 +40,27 @@ I can automatically add pre-setted caption and button to the files in channels.
 
 👉 <b>Bold text</b>
       
-📌 <code>**text**</code>  **text**
+📌 <code>**text**</code>
 
 👉 <b>Italic text</b>
 
-📌 <code>__text__</code>  __text__
+📌 <code>__text__</code>
 
 👉 <b>Underline text</b>
       
-📌 <code>--text--</code>  --text--
+📌 <code>--text--</code>
 
 👉 <b>Strike text</b>
 
-📌 <code>~~text~~</code>  ~~text~~
+📌 <code>~~text~~</code>
 
 👉 <b>Code text</b>
 
-📌 <code>`text`</code>  `text`
+📌 <code>`text`</code>
 
 👉 <b>Hyperlink text</b>
 
-📌 <code>[text](https://t.me/durov)</code>  [text](https://t.me/durov)
+📌 <code>[text](https://t.me/durov)</code>
 
 """
 
