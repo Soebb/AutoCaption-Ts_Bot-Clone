@@ -18,7 +18,8 @@ async def editing(bot, message):
         if ("/set_cap" in message.text) and ((len(message.text.split(' ')) == 2) or (len(message.text.split(' ')) == 1)):
             await message.reply_text("🖊️ 𝐒𝐄𝐓 𝐂𝐀𝐏𝐓𝐈𝐎𝐍 \n\nUse this command to set custom caption for any of your channels.\n\n👉 `/set_cap -1001448973320 My Caption`", quote = True)
         elif ("/set_cap" in message.text) and (len(message.text.split(' ')) != 2) and (len(message.text.split(' ')) != 1):
-            command, channel, caption = message.text.replace("-100", "").split(' ', 2)
+            caption = message.text.markdown.split(' ', 2)[2]
+            channel = message.text.split(' ', 2)[1].replace("-100", "")
             try:
                 await update_caption(channel, caption)
             except Exception as e:
