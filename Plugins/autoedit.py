@@ -57,9 +57,8 @@ async def editing(bot, message):
             channel = str(message.chat.id).replace('-100', '').replace('1', '')
             btn = await get_button(int(channel))
             button = btn.button
-        except Exception as e:
+        except:
             button = None
-            print(f"eror: {e}")
             pass
 
         try:
@@ -67,18 +66,24 @@ async def editing(bot, message):
             cap = await get_caption(int(channel))
             caption = cap.caption.replace("fname", f"{media.file_name}")
         except:
-            caption = " "
+            caption = None
             pass
        
         if button is not None:
             Url = button.rsplit(' ', 1)[1]
             Name = button.split(' | ')[0]
-            try:
-                await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(Name, url=f"{Url}")]]))
-            except Exception as e:
-                print(e)
-
-        elif button is None:
+            if caption is not None:
+                try:
+                    await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(Name, url=f"{Url}")]]))
+                except Exception as e:
+                    print(e)
+            elif caption is None:
+                try:
+                    await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(Name, url=f"{Url}")]]))
+                except Exception as e:
+                    print(e)
+        
+        elif (button is None) and (caption is not None):
             try:
                 await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown")
             except Exception as e:
