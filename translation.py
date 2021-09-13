@@ -3,66 +3,34 @@ class Translation(object):
       
       START_TEXT = """
 
-😃 Hai {},
-
+😃 Hi {},
 I am Channel Auto Caption bot.
 I can automatically add pre-setted caption and button to the files in channels.
 
 • Commands
-
 - /set_cap To Set Caption
 - /set_btn To Set Button
 - /rmv_cap To Remove Caption
 - /rmv_btn To Remove Button
 """    
+      DYNAMIC_TEXT = """
 
-      HELP_TEXT = """
-
-<u>💡 𝐇𝐞𝐥𝐩</u> 
-
-
-👉 Add me as a Admin in your channel with edit permission
-
-👉 Add your caption using <code>/set_caption</code> command
-
-<i>( Only Admin )</i>
-   
-<i>(Support Markdown)</i>
-
-👉 Forward your files in your channel and I will edit it
-
-<b><a href="https://t.me/Ts_bots">©️ ᴛʀᴀᴄᴋsᴛᴜᴅɪᴏ's ʙᴏᴛs</a></b>
-"""    
-              
-
-     
-      ABOUT_TEXT = """
-
-📕 --𝐀𝐛𝐨𝐮𝐭-- --𝐌𝐞--
+🔰 <u>About Dynamic</u>
 
 
-○ ᴍʏ ɴᴀᴍᴇ : [Auto Caption | Ts Bots](https://t.me/Anylink_Movies)
+- You can add {variable_name} in caption, bot will replace these variables by its value according to file.
 
-○ ʟᴀɴɢᴜᴀɢᴇ : ᴘʏᴛʜᴏɴ 
+  Example: Title: {filename}
 
-○ ғʀᴀᴍᴇᴡᴏʀᴋ : ᴘʏʀᴏɢʀᴀᴍ 
+  Supported variables:
+  filename, ext
 
-○ sᴇʀᴠᴇʀ : ʜᴇʀᴏᴋᴜ 
-
-○ ᴠᴇʀsɪᴏɴ : 1.1.0
-
-○ sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ  : [ᴛᴏᴜᴄʜ ᴍᴇ 🤗](https://github.com/Ts-bots/AutoCaption-Ts_Bot-Clone)
-
-○ ᴄʀᴇᴀᴛᴏʀ :  [ᴛʀᴀᴄᴋsᴛᴜᴅɪᴏ](https://t.me/trackstudio)
- 
-__ᴘʟᴇᴀsᴇ ɴᴏᴛᴇ ɪ ᴀᴍ ɴᴏᴛ ᴀ ᴘʀᴏ ᴄᴏᴅᴇʀ ᴀɴᴅ ᴛʜɪs ɪs ᴍʏ ғɪʀsᴛ ᴛɪᴍᴇ ɪ ᴀᴍ ɢɪᴠɪɴɢ ᴀɴ ᴏᴘᴇɴ sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ ᴏғ ʙᴏᴛ ғᴏʀ ᴇᴠᴇʀʏᴏɴᴇ ᴡʜɪᴄʜ ᴡᴀs ᴡʀɪᴛᴇʀ ɪɴ ᴍʏ ᴏᴡɴ ʜᴀɴᴅs, sᴏ ɪғ ᴀɴʏ ʙᴜɢs ғᴇᴇʟ ғʀᴇᴇ ᴛᴏ sᴀʏ
-ɪᴛ ᴍᴀʏ ʙᴇ ɴᴏᴛ ᴛʜᴇ ʙᴇsᴛ ʙᴜᴛ ғᴏʀ ᴍᴇ ɪᴛ ɪs ᴛʜᴇ ʙᴇsᴛ 🥰
-
-ᴛʜᴀɴᴋs ᴛᴏ ᴍʏ ʙᴇʟᴏᴠᴇᴅ ғʀɪᴇɴᴅ [ᴀɴᴏɴʏᴍᴏᴜs](https://t.me/Anoymous_Ns)__
-
-**[©️ ᴛʀᴀᴄᴋsᴛᴜᴅɪᴏ's ʙᴏᴛs](https://t.me/ts_bots)**
+  Additional variables:
+  For video files: width, height
+  For audio files: title, artist
 
 """
+
 
       MARKDOWN_TEXT = """
 
@@ -71,21 +39,27 @@ __ᴘʟᴇᴀsᴇ ɴᴏᴛᴇ ɪ ᴀᴍ ɴᴏᴛ ᴀ ᴘʀᴏ ᴄᴏᴅᴇʀ ᴀ
 
 👉 <b>Bold text</b>
       
-📌 <code>**text**</code> 
+📌 <code>**text**</code>  **text**
 
 👉 <b>Italic text</b>
 
-📌 <code>__text__</code> 
+📌 <code>__text__</code>  __text__
+
+👉 <b>Underline text</b>
+      
+📌 <code>--text--</code>  --text--
+
+👉 <b>Strike text</b>
+
+📌 <code>~~text~~</code>  ~~text~~
 
 👉 <b>Code text</b>
 
-📌 <code>`text`</code>   
+📌 <code>`text`</code>  `text`
 
 👉 <b>Hyperlink text</b>
 
-📌 <code>[hyperlink_text](https://t.me/Ts_bots)</code> 
-
-<b><a href="https://t.me/Ts_bots">©️ ᴛʀᴀᴄᴋsᴛᴜᴅɪᴏ's ʙᴏᴛs</a></b>
+📌 <code>[text](https://t.me/durov)</code>  [text](https://t.me/durov)
 
 """
 
