@@ -24,7 +24,7 @@ async def editing(bot, message):
                 await update_caption(channel, caption)
             except Exception as e:
                 print(e)
-                return await message.reply_text("It seems a caption already seted for this channel id, you should first use /rmv_cap command to remove the current caption and then try seting new again.")
+                return await message.reply_text("⚠️\n\nIt seems a caption already seted for this channel id, you should first use /rmv_cap command to remove the current caption and then try seting new again.", quote=True)
             await message.reply_text(f"**--Your Caption--:**\n\n{caption}", quote=True)
         if ("/set_btn" in message.text) and ((len(message.text.split(' ')) == 2) or (len(message.text.split(' ')) == 1)):
             await message.reply_text("🖊️ 𝐒𝐄𝐓 BUTTON \n\nUse this command to set button for any of your channels.\nSend a Button name and URL(separated by ' | ').\n\n👉 `/set_btn -1001448973320 Channel | https://t.me/channel`", quote = True)
@@ -35,21 +35,21 @@ async def editing(bot, message):
                 await update_button(channel, button)
             except Exception as e:
                 print(e)
-                return await message.reply_text("⚠️\nIt seems a button already seted for this channel id.\nYou should first use /rmv_btn command to remove the current button and then try to seting new.")
-            await message.reply_text(f"**--Your Button--:**\n\n{button}", quote=True)
+                return await message.reply_text("⚠️\n\nIt seems a button already seted for this channel id.\nYou should first use /rmv_btn command to remove the current button and then try to seting new.", quote=True)
+            await message.reply_text(f"**--Your Button--:**\n\n{button}", quote=True, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(button.split(' | ')[0], url=f"{button.rsplit(' ', 1)[1]}")]]))
       
         if (message.text == "/rmv_cap"):
             await message.reply_text("Use this command to remove the current caption of any of your channels.\n\n👉 `/rmv_cap -1001448973320`", quote = True)
         elif ("/rmv_cap" in message.text) and (len(message.text.split(' ')) != 1):
             channel = message.text.split(' ', 1)[1].replace("-100", "")
             await del_caption(channel)
-            await message.reply_text("The Caption Removed Successfully.")
+            await message.reply_text("✅The Caption Removed Successfully.", quote=True)
         if (message.text == "/rmv_btn"):
             await message.reply_text("Use this command to remove the current button of any of your channels.\n\n👉 `/rmv_btn -1001448973320`", quote = True)
         elif ("/rmv_btn" in message.text) and (len(message.text.split(' ')) != 1):
             channel = message.text.split(' ', 1)[1].replace("-100", "").replace("1", "")
             await del_button(channel)
-            await message.reply_text("The Button Removed Successfully.")
+            await message.reply_text("✅The Button Removed Successfully.", quote=True)
 
     if (message.chat.type == "channel"):
         media = message.video or message.document or message.audio
@@ -69,22 +69,10 @@ async def editing(bot, message):
         except:
             caption = " "
             pass
-        
-        
+       
         if button is not None:
             Url = button.rsplit(' ', 1)[1]
-            Name = button.split(' ', 2)[2]
-            
-            N = button.split(' | ')[+1]
-            G = button.split(' ', 2)[2].split(f" | {N}")[0]
-            J = button.split(' | ')[0]
-            
-            print(button)
-            print(J)
-            print(N)
-            print(G)
-            print(Name)
-            
+            Name = button.split(' | ')[0]
             try:
                 await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(Name, url=f"{Url}")]]))
             except Exception as e:
