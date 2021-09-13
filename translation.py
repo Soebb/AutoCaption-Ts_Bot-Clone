@@ -5,11 +5,15 @@ class Translation(object):
 
 😃 Hai {},
 
-I am a simple auto caption bot
-I can automatically add pre-setted caption to the files in channels
+I am Channel Auto Caption bot.
+I can automatically add pre-setted caption and button to the files in channels.
 
-I am currently working for a channel if you want to use me, Use my source code and Deploy me
+• Commands
 
+- /set_cap To Set Caption
+- /set_btn To Set Button
+- /rmv_cap To Remove Caption
+- /rmv_btn To Remove Button
 """    
 
       HELP_TEXT = """
