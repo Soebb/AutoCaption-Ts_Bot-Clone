@@ -79,7 +79,7 @@ async def editing(bot, message):
             Name = button.split(' | ')[0]
             if caption is not None:
                 try:
-                    await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = f'{caption}', parse_mode = "markdown", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(Name, url=f"{Url}")]]))
+                    await bot.edit_message_caption(chat_id = message.chat.id, message_id = message.message_id, caption = caption, parse_mode = "markdown", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(Name, url=f"{Url}")]]))
                 except Exception as e:
                     print(e)
             elif caption is None:
