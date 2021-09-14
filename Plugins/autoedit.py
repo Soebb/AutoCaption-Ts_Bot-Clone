@@ -65,7 +65,7 @@ async def editing(bot, message):
             await del_button(channel)
             await message.reply_text("✅The Button Removed Successfully.", quote=True)
 
-    if (message.chat.type == "channel"):
+    if (message.chat.type == "channel") and (message.video or message.document or message.audio):
         m = message.video or message.document or message.audio
         try:
             channel = str(message.chat.id).replace('-100', '').replace('1', '')
