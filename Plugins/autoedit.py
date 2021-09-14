@@ -22,7 +22,7 @@ async def editing(bot, message):
             channel = message.text.split(' ', 2)[1].replace("-100", "")
             try:
                 cap = await get_caption(int(channel))
-                caption = cap.caption
+                c = cap.caption
             except:
                 await update_caption(channel, caption)
                 return await message.reply_text(f"**--Your Caption--:**\n\n{caption}", quote=True)
@@ -35,7 +35,7 @@ async def editing(bot, message):
             channel = message.text.split(' ', 2)[1].replace("-100", "").replace("1", "")
             try:
                 btn = await get_button(int(channel))
-                button = btn.button
+                b = btn.button
             except:
                 await update_button(channel, button)
                 return await message.reply_text(f"**--Your Button--:**\n\n{button}", quote=True, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(button.split(' | ')[0], url=f"{button.rsplit(' ', 1)[1]}")]]))
@@ -47,7 +47,7 @@ async def editing(bot, message):
             channel = message.text.split(' ', 1)[1].replace("-100", "")
             try:
                 cap = await get_caption(int(channel))
-                caption = cap.caption
+                c = cap.caption
             except:
                 return await message.reply_text("Caption not setted yet!", quote=True)     
             await del_caption(channel)
@@ -58,7 +58,7 @@ async def editing(bot, message):
             channel = message.text.split(' ', 1)[1].replace("-100", "").replace("1", "")
             try:
                 btn = await get_button(int(channel))
-                button = btn.button
+                b = btn.button
             except:
                 return await message.reply_text("Button not setted yet!", quote=True)     
             await del_button(channel)
