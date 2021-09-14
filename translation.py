@@ -6,7 +6,8 @@ class Translation(object):
 😃 Hi {},
 I am Channel Auto Caption bot.
 
-I can automatically add pre-setted caption and button to the files in channels.
+I can automatically add pre-setted caption and button to the files.
+You can also use Markdown styles, supported Dynamic variables in seting caption (Details in below buttons).
 
 • Commands
 - /set_cap To Set Caption
