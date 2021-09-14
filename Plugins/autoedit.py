@@ -24,16 +24,10 @@ async def editing(bot, message):
                 cap = await get_caption(int(channel))
                 caption = cap.caption
             except:
-                caption = None
-                pass
-            if caption is None:
-                try:
-                    await update_caption(channel, caption)
-                except Exception as e:
-                    print(e)
-                    return await message.reply_text(f"ERROR : {e}", quote=True)
-
-            await message.reply_text(f"**--Your Caption--:**\n\n{caption}", quote=True)
+                await update_caption(channel, caption)
+                return await message.reply_text(f"**--Your Caption--:**\n\n{caption}", quote=True)
+            await message.reply_text("⚠️\n\nIt seems a caption already seted for this channel id, you should first use /rmv_cap command to remove the current caption and then try seting new again.", quote=True)
+           
         if ("/set_btn" in message.text) and ((len(message.text.split(' ')) == 2) or (len(message.text.split(' ')) == 1)):
             await message.reply_text("🖊️ 𝐒𝐄𝐓 BUTTON \n\nUse this command to set button for any of your channels.\nSend a Button name and URL(separated by ' | ').\n\n👉 `/set_btn -1001448973320 Channel | https://t.me/channel`", quote = True)
         elif ("/set_btn" in message.text) and (len(message.text.split(' ')) != 2) and (len(message.text.split(' ')) != 1):
@@ -43,16 +37,10 @@ async def editing(bot, message):
                 btn = await get_button(int(channel))
                 button = btn.button
             except:
-                button = None
-                pass
-            if button is None:
-                try:
-                    await update_button(channel, button)
-                except Exception as e:
-                    print(e)
-                    return await message.reply_text(f"ERROR : {e}", quote=True)
-            await message.reply_text(f"**--Your Button--:**\n\n{button}", quote=True, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(button.split(' | ')[0], url=f"{button.rsplit(' ', 1)[1]}")]]))
-      
+                await update_button(channel, button)
+                return await message.reply_text(f"**--Your Button--:**\n\n{button}", quote=True, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(button.split(' | ')[0], url=f"{button.rsplit(' ', 1)[1]}")]]))
+            await message.reply_text("⚠️\n\nIt seems a button already seted for this channel id, you should first use /rmv_btn command to remove the current button and then try seting new again.", quote=True)
+           
         if (message.text == "/rmv_cap"):
             await message.reply_text("Use this command to remove the current caption of any of your channels.\n\n👉 `/rmv_cap -1001448973320`", quote = True)
         elif ("/rmv_cap" in message.text) and (len(message.text.split(' ')) != 1):
@@ -61,10 +49,8 @@ async def editing(bot, message):
                 cap = await get_caption(int(channel))
                 caption = cap.caption
             except:
-                caption = None
-                pass
-            if caption is not None:
-                await del_caption(channel)
+                return await message.reply_text("Caption not setted yet!", quote=True)     
+            await del_caption(channel)
             await message.reply_text("✅The Caption Removed Successfully.", quote=True)
         if (message.text == "/rmv_btn"):
             await message.reply_text("Use this command to remove the current button of any of your channels.\n\n👉 `/rmv_btn -1001448973320`", quote = True)
@@ -74,10 +60,8 @@ async def editing(bot, message):
                 btn = await get_button(int(channel))
                 button = btn.button
             except:
-                button = None
-                pass
-            if button is not None:
-                await del_button(channel)
+                return await message.reply_text("Button not setted yet!", quote=True)     
+            await del_button(channel)
             await message.reply_text("✅The Button Removed Successfully.", quote=True)
 
     if (message.chat.type == "channel"):
