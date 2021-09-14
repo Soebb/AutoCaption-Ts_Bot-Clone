@@ -13,7 +13,7 @@ from pyrogram.errors import FloodWait
 
 
 @autocaption.on_message(filters.private & ~filters.edited)
-async def editing(bot, message):
+async def setrmv(bot, message):
     if ("/set_cap" in message.text) and ((len(message.text.split(' ')) == 2) or (len(message.text.split(' ')) == 1)):
         await message.reply_text("🖊️ 𝐒𝐄𝐓 𝐂𝐀𝐏𝐓𝐈𝐎𝐍 \n\nUse this command to set custom caption for any of your channels.\n\n👉 `/set_cap -1001448973320 My Caption`", quote = True)
     elif ("/set_cap" in message.text) and (len(message.text.split(' ')) != 2) and (len(message.text.split(' ')) != 1):
@@ -65,7 +65,7 @@ async def editing(bot, message):
         await message.reply_text("✅The Button Removed Successfully.", quote=True)
 
 
-@autocaption.on_message(filters.channel & ~filters.edited, group=-1)
+@autocaption.on_message(filters.channel & (filters.document | filters.video | filters.audio ) & ~filters.edited, group=-1)
 async def editing(bot, message):
     m = message.video or message.document or message.audio
     try:
