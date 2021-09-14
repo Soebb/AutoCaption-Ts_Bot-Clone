@@ -21,10 +21,18 @@ async def editing(bot, message):
             caption = message.text.markdown.split(' ', 2)[2]
             channel = message.text.split(' ', 2)[1].replace("-100", "")
             try:
-                await update_caption(channel, caption)
-            except Exception as e:
-                print(e)
-                return await message.reply_text("⚠️\n\nIt seems a caption already seted for this channel id, you should first use /rmv_cap command to remove the current caption and then try seting new again.", quote=True)
+                cap = await get_caption(int(channel))
+                caption = cap.caption
+            except:
+                caption = None
+                pass
+            if caption is None:
+                try:
+                    await update_caption(channel, caption)
+                except Exception as e:
+                    print(e)
+                    return await message.reply_text(f"ERROR : {e}", quote=True)
+
             await message.reply_text(f"**--Your Caption--:**\n\n{caption}", quote=True)
         if ("/set_btn" in message.text) and ((len(message.text.split(' ')) == 2) or (len(message.text.split(' ')) == 1)):
             await message.reply_text("🖊️ 𝐒𝐄𝐓 BUTTON \n\nUse this command to set button for any of your channels.\nSend a Button name and URL(separated by ' | ').\n\n👉 `/set_btn -1001448973320 Channel | https://t.me/channel`", quote = True)
@@ -32,10 +40,17 @@ async def editing(bot, message):
             button = message.text.split(' ', 2)[2]
             channel = message.text.split(' ', 2)[1].replace("-100", "").replace("1", "")
             try:
-                await update_button(channel, button)
-            except Exception as e:
-                print(e)
-                return await message.reply_text("⚠️\n\nIt seems a button already seted for this channel id.\nYou should first use /rmv_btn command to remove the current button and then try to seting new.", quote=True)
+                btn = await get_button(int(channel))
+                button = btn.button
+            except:
+                button = None
+                pass
+            if button is None:
+                try:
+                    await update_button(channel, button)
+                except Exception as e:
+                    print(e)
+                    return await message.reply_text(f"ERROR : {e}", quote=True)
             await message.reply_text(f"**--Your Button--:**\n\n{button}", quote=True, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(button.split(' | ')[0], url=f"{button.rsplit(' ', 1)[1]}")]]))
       
         if (message.text == "/rmv_cap"):
