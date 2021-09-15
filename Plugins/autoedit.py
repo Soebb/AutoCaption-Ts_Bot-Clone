@@ -21,7 +21,13 @@ async def editing(bot, message):
             caption = message.text.markdown.split(' ', 2)[2]
             channel = message.text.split(' ', 2)[1].replace("-100", "")
             try:
-                cap = await get_caption(int(channel))
+                is_admin=await client.get_chat_member(chat_id=channel, user_id=message.from_user.id)
+            except UserNotParticipant:
+                return await message.reply("It seems you are not a member of this channel and hence you can't do this action.")
+            if not is_admin.can_edit_messages:
+                return await message.reply("You are not permited to do this, since you do not have the right to edit posts in this channel.")
+            try:
+                cap = await get_caption(channel)
                 c = cap.caption
             except:
                 await update_caption(channel, caption)
@@ -34,7 +40,13 @@ async def editing(bot, message):
             button = message.text.split(' ', 2)[2]
             channel = message.text.split(' ', 2)[1].replace("-100", "").replace("1", "")
             try:
-                btn = await get_button(int(channel))
+                is_admin=await client.get_chat_member(chat_id=channel, user_id=message.from_user.id)
+            except UserNotParticipant:
+                return await message.reply("It seems you are not a member of this channel and hence you can't do this action.")
+            if not is_admin.can_edit_messages:
+                return await message.reply("You are not permited to do this, since you do not have the right to edit posts in this channel.")
+            try:
+                btn = await get_button(channel)
                 b = btn.button
             except:
                 await update_button(channel, button)
@@ -46,7 +58,7 @@ async def editing(bot, message):
         elif ("/rmv_cap" in message.text) and (len(message.text.split(' ')) != 1):
             channel = message.text.split(' ', 1)[1].replace("-100", "")
             try:
-                cap = await get_caption(int(channel))
+                cap = await get_caption(channel)
                 c = cap.caption
             except:
                 return await message.reply_text("Caption not setted yet!", quote=True)     
@@ -58,7 +70,7 @@ async def editing(bot, message):
         elif ("/rmv_btn" in message.text) and (len(message.text.split(' ')) != 1):
             channel = message.text.split(' ', 1)[1].replace("-100", "").replace("1", "")
             try:
-                btn = await get_button(int(channel))
+                btn = await get_button(channel)
                 b = btn.button
             except:
                 return await message.reply_text("Button not setted yet!", quote=True)     
