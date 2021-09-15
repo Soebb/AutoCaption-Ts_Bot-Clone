@@ -15,8 +15,8 @@ You can also use Markdown styles, supported Dynamic variables in seting caption 
 - /rmv_cap To Remove Caption
 - /rmv_btn To Remove Button
 
-⚠️NOTE
 
+⚠️NOTE
 ➪ Before seting, ensure that bot is admin in your channel with editing permission.
 """    
       DYNAMIC_TEXT = """
