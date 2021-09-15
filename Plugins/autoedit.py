@@ -9,7 +9,7 @@ from bot import autocaption
 from config import Config
 from database.database import *
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from pyrogram.errors import FloodWait
+from pyrogram.errors import UserNotParticipant, FloodWait
 
 
 @autocaption.on_message(~filters.edited, group=-1)
@@ -39,7 +39,7 @@ async def editing(bot, message):
             button = message.text.split(' ', 2)[2]
             channel = message.text.split(' ', 2)[1].replace("-100", "").replace("1", "")
             try:
-                is_admin=await client.get_chat_member(chat_id=channel, user_id=message.from_user.id)
+                is_admin=await bot.get_chat_member(chat_id=channel, user_id=message.from_user.id)
             except UserNotParticipant:
                 return await message.reply("It seems you are not a member of this channel and hence you can't do this action.")
             if not is_admin.can_edit_messages:
